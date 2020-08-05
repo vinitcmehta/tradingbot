@@ -5,6 +5,7 @@ import time
 import constant
 
 #TODO remove global variable usage
+#TODO change balance output to only one crypto and GBP
 #TODO implement helper functions
 #TODO add logging
 #TODO implement trends
