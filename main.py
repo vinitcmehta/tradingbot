@@ -3,8 +3,11 @@ import config
 from binance.client import Client
 import time
 import constant
+from binance.exceptions import BinanceOrderException
 
 #TODO remove global variable usage
+#TODO Implement sell code
+#TODO find out commission Binance take
 #TODO change balance output to only one crypto and GBP
 #TODO implement helper functions
 #TODO add logging
@@ -87,8 +90,33 @@ def try_to_sell(percentageDiff):
 
 #Main loop
 
-while True:
-    attempt_to_make_trade()
-    time.sleep(5)
+#while True:
+#    attempt_to_make_trade()
+#    time.sleep(5)
 
+#Play with test orders
+
+#try:
+#    result = client.create_test_order(
+#        symbol='XRPGBP',
+#        side=Client.SIDE_BUY,
+#        type=Client.ORDER_TYPE_MARKET,
+#        quantity=50)
+#except BinanceOrderException as e:
+#    print(e)
+#else:
+#    print("Success")
+
+#Buy 50 Ripple Coins with GBP
+
+#try:
+#    result = client.create_order(
+#        symbol='XRPGBP',
+#        side=Client.SIDE_BUY,
+#        type=Client.ORDER_TYPE_MARKET,
+#        quantity=50)
+#except BinanceOrderException as e:
+#    print(e)
+#else:
+#    print("Success")
 
