@@ -7,7 +7,6 @@ from binance.exceptions import BinanceOrderException
 
 #TODO remove global variable usage
 #TODO Implement sell code
-#TODO find out commission Binance take
 #TODO change balance output to only one crypto and GBP
 #TODO implement helper functions
 #TODO add logging
@@ -64,7 +63,7 @@ def attempt_to_make_trade():
     else:
         try_to_sell(percentageDiff)
 
-
+#TODO factor in 0.1% binance fee
 def try_to_buy(percentageDiff):
     global isNextOperationBuy
     global lastOpPrice
@@ -76,6 +75,7 @@ def try_to_buy(percentageDiff):
     else:
         print("not buying")
 
+#TODO factor in 0.1% binance fee
 def try_to_sell(percentageDiff):
     global isNextOperationBuy
     global lastOpPrice
