@@ -21,8 +21,8 @@ client = Client(api_key, api_secret)
 
 # get market depth
 depth = client.get_order_book(symbol='XRPGBP')
-
 print(depth)
+
 
 #Helper functions
 
@@ -31,9 +31,19 @@ def get_balances():
     print(client.get_account())
     return client.get_account()
 
+#Get market price of XRPGBP
 def get_market_price():
     print("Getting market price")
-    return 100
+    allTickers = client.get_all_tickers()
+    print(allTickers)
+    print(allTickers[0].get("symbol"))
+    print(allTickers[0].get("price"))
+
+    for dicts in allTickers:
+        if dicts.get("symbol") == "XRPGBP":
+            return dicts.get("price")
+
+print(get_market_price())
 
 #TODO factor in 0.1% binance fee
 def place_sell_order():
@@ -65,7 +75,7 @@ def place_sell_order():
     #   print("Success")
     #return 100
 
-place_sell_order()
+
 #TODO factor in 0.1% binance fee
 def place_buy_order():
     print("place buy order")
