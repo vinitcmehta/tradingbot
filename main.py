@@ -34,14 +34,7 @@ def get_balances():
 #Get market price of XRPGBP
 def get_market_price():
     print("Getting market price")
-    allTickers = client.get_all_tickers()
-    print(allTickers)
-    print(allTickers[0].get("symbol"))
-    print(allTickers[0].get("price"))
-
-    for dicts in allTickers:
-        if dicts.get("symbol") == "XRPGBP":
-            return dicts.get("price")
+    return client.get_symbol_ticker(symbol='XRPGBP').get("price")
 
 print(get_market_price())
 
