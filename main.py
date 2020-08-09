@@ -122,6 +122,6 @@ def try_to_sell(percentageDiff):
 
 while True:
     attempt_to_make_trade()
-    time.sleep(5)
+    time.sleep(7200)
 
 
