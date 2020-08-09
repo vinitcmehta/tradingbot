@@ -7,7 +7,8 @@ from binance.exceptions import BinanceOrderException, BinanceAPIException
 
 #TODO remove global variable usage
 #TODO change balance output to only one crypto and GBP
-#TODO implement helper functions
+#TODO look into limit orders rather than market orders
+#TODO change or add further crypto symbols
 #TODO implement get operation details
 #TODO add logging
 #TODO implement trends
