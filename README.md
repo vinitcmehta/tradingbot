@@ -10,7 +10,7 @@ pip install python-binance
 Setup:
 Add a config.py file in the format below:
 
-api_key = XXX
+api_key = XXX  
 api_secret = XXX
 
 
