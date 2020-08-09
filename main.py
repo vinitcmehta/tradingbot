@@ -3,11 +3,12 @@ import config
 from binance.client import Client
 import time
 import constant
-from binance.exceptions import BinanceOrderException
+from binance.exceptions import BinanceOrderException, BinanceAPIException
 
 #TODO remove global variable usage
 #TODO change balance output to only one crypto and GBP
 #TODO implement helper functions
+#TODO implement get operation details
 #TODO add logging
 #TODO implement trends
 #TODO add monitoring with dashboard
@@ -34,70 +35,45 @@ def get_balances():
 #Get market price of XRPGBP
 def get_market_price():
     print("Getting market price")
-    return client.get_symbol_ticker(symbol='XRPGBP').get("price")
+    return float(client.get_symbol_ticker(symbol='XRPGBP').get("price"))
 
 print(get_market_price())
 
 #TODO factor in 0.1% binance fee
 def place_sell_order():
     print("place sell order")
-    # Play with test orders
-
-    #try:
-    #   result = client.create_test_order(
-    #       symbol='XRPGBP',
-    #       side=Client.SIDE_SELL,
-    #       type=Client.ORDER_TYPE_MARKET,
-    #       quantity=49.9)
-    #except BinanceOrderException as e:
-    #   print(e)
-    #else:
-    #   print("Success")
-
     # Sell 49.9 Ripple Coins with GBP
 
-    #try:
-    #   result = client.create_order(
-    #       symbol='XRPGBP',
-    #       side=Client.SIDE_SELL,
-    #       type=Client.ORDER_TYPE_MARKET,
-    #       quantity=49.9)
-    #except BinanceOrderException as e:
-    #   print(e)
-    #else:
-    #   print("Success")
-    #return 100
+    try:
+       result = client.create_order(
+           symbol='XRPGBP',
+           side=Client.SIDE_SELL,
+           type=Client.ORDER_TYPE_MARKET,
+           quantity=49.9)
+    except BinanceAPIException as e:
+       print(e)
+    else:
+       print("Success")
+    return get_market_price()
 
 
 #TODO factor in 0.1% binance fee
 def place_buy_order():
     print("place buy order")
-    # Play with test orders
-
-    # try:
-    #    result = client.create_test_order(
-    #        symbol='XRPGBP',
-    #        side=Client.SIDE_BUY,
-    #        type=Client.ORDER_TYPE_MARKET,
-    #        quantity=50)
-    # except BinanceOrderException as e:
-    #    print(e)
-    # else:
-    #    print("Success")
 
     # Buy 50 Ripple Coins with GBP
 
-    # try:
-    #    result = client.create_order(
-    #        symbol='XRPGBP',
-    #        side=Client.SIDE_BUY,
-    #        type=Client.ORDER_TYPE_MARKET,
-    #        quantity=50)
-    # except BinanceOrderException as e:
-    #    print(e)
-    # else:
-    #    print("Success")
-    return 100
+    try:
+       result = client.create_order(
+           symbol='XRPGBP',
+           side=Client.SIDE_BUY,
+           type=Client.ORDER_TYPE_MARKET,
+           quantity=50)
+    except BinanceOrderException as e:
+       print(e)
+    else:
+       print("Success")
+    return get_market_price()
 
 def get_operation_details():
     print("get operation details")
@@ -107,12 +83,13 @@ def get_operation_details():
 
 isNextOperationBuy = True
 
-lastOpPrice = 100.00
+lastOpPrice = 0.22503000
 
 def attempt_to_make_trade():
     print ("attempt to make a trade")
     currentPrice = get_market_price()
     percentageDiff = ((currentPrice - lastOpPrice)/lastOpPrice)*100
+    print("percentage diff is: " + str(percentageDiff))
     if isNextOperationBuy:
         try_to_buy(percentageDiff)
     else:
@@ -143,9 +120,8 @@ def try_to_sell(percentageDiff):
 
 #Main loop
 
-#while True:
-#    attempt_to_make_trade()
-#    time.sleep(5)
-
+while True:
+    attempt_to_make_trade()
+    time.sleep(5)
 
 
