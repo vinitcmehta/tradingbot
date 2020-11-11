@@ -15,3 +15,4 @@ api_secret = XXX
 
 
 Then run main.py
+And you're done!
